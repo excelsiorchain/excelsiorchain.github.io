@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background Sound</title>
+</head>
+<body>
+    <h1>Welcome to the Website</h1>
+    <p>This webpage has a background sound.</p>
+
+    <script>
+        // Create a new Audio context
+        const audioContext = new AudioContext();
+
+        // Load the audio file
+        fetch('background_music.mp3')
+            .then(response => response.arrayBuffer())
+            .then(buffer => audioContext.decodeAudioData(buffer))
+            .then(decodedData => {
+                // Create a new sound source
+                const soundSource = audioContext.createBufferSource();
+                soundSource.buffer = decodedData;
+                soundSource.loop = true;
+
+                // Connect the sound source to the output
+                soundSource.connect(audioContext.destination);
+
+                // Start playing the sound
+                soundSource.start();
+            })
+            .catch(error => console.error('Error loading audio file:', error));
+    </script>
+</body>
+</html>

@@ -16,7 +16,7 @@
             audioContext = new AudioContext();
 
             // Load the audio file
-            fetch('http://excelsiorchain.github.io//background_music.mp3')
+            fetch('https://excelsiorchain.github.io//background_music.mp3')
                 .then(response => response.arrayBuffer())
                 .then(buffer => audioContext.decodeAudioData(buffer))
                 .then(decodedData => {

@@ -6,48 +6,8 @@
 <body>
     <h1>Welcome to the Website</h1>
     <p>This webpage has a background sound.</p>
-    <button id="playAudioBtn">Play Background Sound</button>
-
-    <script>
-        let audioContext, soundSource;
-
-        // Create a new Audio context
-        function createAudioContext() {
-            audioContext = new AudioContext();
-
-            // Load the audio file
-            fetch('https://excelsiorchain.github.io//background_music.mp3')
-                .then(response => response.arrayBuffer())
-                .then(buffer => audioContext.decodeAudioData(buffer))
-                .then(decodedData => {
-                    // Create a new sound source
-                    soundSource = audioContext.createBufferSource();
-                    soundSource.buffer = decodedData;
-                    soundSource.loop = true;
-
-                    // Connect the sound source to the output
-                    soundSource.connect(audioContext.destination);
-                })
-                .catch(error => console.error('Error loading audio file:', error));
-        }
-
-        // Play the background sound
-        function playAudio() {
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            if (soundSource) {
-                soundSource.start();
-            }
-        }
-
-        // Add a click event listener to the button
-        document.getElementById('playAudioBtn').addEventListener('click', () => {
-            if (!audioContext) {
-                createAudioContext();
-            }
-            playAudio();
-        });
-    </script>
+    <audio autoplay>
+  <source src="mymusic.mp3" type="audio/mpeg">
+</audio>
 </body>
 </html>
